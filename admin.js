@@ -1,107 +1,114 @@
-const adminContainer = document.querySelector('.admin-container');
-const ordersGrid = document.getElementById('orders-grid');
+// Admin Dashboard Logic - jQuery Version
 
-// Password Protection
-function checkAuth() {
-    const isAuth = sessionStorage.getItem('cafe_admin_auth');
-    
-    if (isAuth === 'true') {
-        adminContainer.style.display = 'block';
-        loadOrders();
-    } else {
-        const password = prompt('Please enter owner password to access dashboard:');
-        if (password === 'spwaffles') {
-            sessionStorage.setItem('cafe_admin_auth', 'true');
-            adminContainer.style.display = 'block';
+$(document).ready(function () {
+    const password = "spwaffles";
+    const $container = $('.admin-container');
+    const $grid = $('#orders-grid');
+
+    // Simple Authentication Check
+    function checkAuth() {
+        const isAuth = sessionStorage.getItem('cafe_admin_auth');
+
+        if (isAuth === 'true') {
+            $container.show();
             loadOrders();
         } else {
-            alert('Incorrect password. Access denied.');
-            window.location.href = 'index.html';
+            const input = prompt("Please enter owner password to access dashboard:");
+            if (input === password) {
+                sessionStorage.setItem('cafe_admin_auth', 'true');
+                $container.fadeIn();
+                loadOrders();
+            } else {
+                alert("Incorrect password. Access denied.");
+                window.location.href = "index.html";
+            }
         }
     }
-}
 
-function loadOrders() {
-    const storedOrders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
+    // Load and Render Orders
+    window.loadOrders = function () {
+        const storedOrders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
+        $grid.empty();
 
-    if (storedOrders.length === 0) {
-        ordersGrid.innerHTML = `
-            <div class="no-orders">
-                <i class='bx bx-receipt' style='font-size: 4rem; margin-bottom: 1rem; opacity: 0.5;'></i>
-                <p>No orders received yet.</p>
-            </div>
-        `;
-        return;
-    }
+        if (storedOrders.length === 0) {
+            $grid.append(`
+                <div class="col-12 text-center py-5 text-muted">
+                    <i class='bx bx-receipt fs-1 mb-3 opacity-50'></i>
+                    <p class="fs-4">No orders received yet.</p>
+                </div>
+            `);
+            return;
+        }
 
-    // Sort orders by newest first by making a copy and reversing
-    const reversedOrders = [...storedOrders].reverse();
+        // Show latest orders first
+        const reversedOrders = [...storedOrders].reverse();
 
-    ordersGrid.innerHTML = '';
+        reversedOrders.forEach((order, index) => {
+            const originalIndex = storedOrders.length - 1 - index;
+            const statusClass = order.status === 'Completed' ? 'bg-success' : 'bg-warning text-dark';
 
-    reversedOrders.forEach((order, index) => {
-        // Find true index in original array
-        const originalIndex = storedOrders.length - 1 - index;
+            let itemsHtml = '';
+            order.items.forEach(item => {
+                itemsHtml += `
+                    <div class="d-flex justify-content-between text-sm py-1 border-bottom border-secondary border-opacity-25">
+                        <span>${item.qty}x ${item.name}</span>
+                        <span class="fw-bold text-white">₹${item.total}</span>
+                    </div>
+                `;
+            });
 
-        let itemsHtml = '';
-        order.items.forEach(item => {
-            itemsHtml += `
-                <div>
-                    <span>${item.qty}x ${item.name}</span>
-                    <span>₹${item.total}</span>
+            const card = `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card bg-dark border-secondary h-100 shadow-sm transition-all duration-300 hover:border-primary">
+                        <div class="card-header bg-transparent d-flex justify-content-between align-items-center border-secondary py-3">
+                            <span class="text-primary fw-bold">#${order.id.slice(-6).toUpperCase()}</span>
+                            <span class="badge ${statusClass}">${order.status}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-muted small mb-3"><i class='bx bx-time'></i> ${order.date}</div>
+                            <div class="order-items mb-3">
+                                ${itemsHtml}
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <span class="fs-4 fw-bold text-primary">₹${order.total}</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-secondary d-flex gap-2 p-3">
+                            ${order.status === 'Pending' ? `
+                                <button class="btn btn-success btn-sm flex-grow-1 fw-bold" onclick="markCompleted(${originalIndex})">
+                                    <i class='bx bx-check'></i> Mark Complete
+                                </button>
+                            ` : ''}
+                            <button class="btn btn-outline-danger btn-sm px-3" onclick="deleteOrder(${originalIndex})">
+                                <i class='bx bx-trash'></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             `;
+            $grid.append(card);
         });
-
-        const isPending = order.status === 'Pending';
-        const badgeClass = isPending ? 'status-pending' : 'status-completed';
-
-        const card = document.createElement('div');
-        card.className = 'order-card';
-        card.innerHTML = `
-            <div class="order-header">
-                <div>
-                    <div class="order-id">${order.id}</div>
-                    <div class="order-date">${order.date}</div>
-                </div>
-                <div>
-                    <span class="status-badge ${badgeClass}">${order.status}</span>
-                </div>
-            </div>
-            <div class="order-items">
-                ${itemsHtml}
-            </div>
-            <div class="order-total">
-                <span>Total:</span>
-                <span style="color: var(--primary-color);">₹${order.total}</span>
-            </div>
-            <div class="action-btns">
-                ${isPending ? `<button class="btn-complete" onclick="markCompleted(${originalIndex})">Mark Completed</button>` : ''}
-                <button class="btn-delete" onclick="deleteOrder(${originalIndex})">Delete</button>
-            </div>
-        `;
-
-        ordersGrid.appendChild(card);
-    });
-}
-
-function markCompleted(index) {
-    const orders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
-    if (orders[index]) {
-        orders[index].status = 'Completed';
-        localStorage.setItem('cafe_orders', JSON.stringify(orders));
-        loadOrders();
     }
-}
 
-function deleteOrder(index) {
-    if (confirm('Are you sure you want to delete this order?')) {
+    // Action Handlers (Globally accessible for onclick)
+    window.markCompleted = function (index) {
         const orders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
-        orders.splice(index, 1);
-        localStorage.setItem('cafe_orders', JSON.stringify(orders));
-        loadOrders();
-    }
-}
+        if (orders[index]) {
+            orders[index].status = 'Completed';
+            localStorage.setItem('cafe_orders', JSON.stringify(orders));
+            loadOrders();
+        }
+    };
 
-// Initialize
-checkAuth();
+    window.deleteOrder = function (index) {
+        if (confirm("Are you sure you want to delete this order?")) {
+            const orders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
+            orders.splice(index, 1);
+            localStorage.setItem('cafe_orders', JSON.stringify(orders));
+            loadOrders();
+        }
+    };
+
+    // Run Auth
+    checkAuth();
+});

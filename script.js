@@ -201,7 +201,12 @@ $(document).ready(function () {
             renderMenu($(this).data('category'));
         });
 
-        // Cart Toggle
+        // Navigation Link Clicks (Close cart on navigate)
+        $('.navbar-dark a[href^="#"]').on('click', function () {
+            cartOffcanvas.hide();
+        });
+
+        // Toggle cart manual
         $('#cart-icon').on('click', () => cartOffcanvas.show());
 
         // Checkout Trigger
@@ -314,3 +319,4 @@ $(document).ready(function () {
     // Launch App
     init();
 });
+

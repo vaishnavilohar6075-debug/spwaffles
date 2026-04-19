@@ -134,12 +134,37 @@
             background: #e74c3c;
         }
 
+        .stats-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stats-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
         .no-orders {
             text-align: center;
-            grid-column: 1 / -1;
-            padding: 3rem;
+            padding: 5rem 2rem;
             color: var(--text-muted);
-            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -156,14 +181,58 @@
     </nav>
 
     <div class="admin-container container py-32" style="display: none;">
-        <div class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="display-6 fw-bold text-white">Order Management</h2>
-            <button class="btn btn-primary d-flex align-items-center gap-2 px-4 shadow-lg" onclick="loadOrders()">
-                <i class='bx bx-refresh fs-4'></i> Refresh Orders
-            </button>
+        <div class="dashboard-header mb-5">
+            <div>
+                <h2 class="display-5 fw-bold text-white mb-2">Order Management</h2>
+                <p class="text-muted mb-0">Track and manage your cafe orders in real-time.</p>
+            </div>
+            <div class="d-flex flex-column align-items-end gap-2">
+                <button id="refresh-btn" class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 shadow-lg rounded-pill" onclick="loadOrders()">
+                    <i class='bx bx-refresh fs-4' id="refresh-icon"></i> <span id="refresh-text">Refresh Dashboard</span>
+                </button>
+                <small class="text-white-50" id="last-updated">Never updated</small>
+            </div>
         </div>
+
+        <!-- Stats Overview -->
+        <div class="row g-4 mb-5" id="stats-row">
+            <div class="col-md-4">
+                <div class="stats-card d-flex align-items-center gap-3">
+                    <div class="stats-icon bg-primary bg-opacity-10 text-primary">
+                        <i class='bx bx-shopping-bag'></i>
+                    </div>
+                    <div>
+                        <p class="text-muted small mb-0">Total Orders</p>
+                        <h3 class="fw-bold mb-0" id="stat-total-orders">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card d-flex align-items-center gap-3">
+                    <div class="stats-icon bg-warning bg-opacity-10 text-warning">
+                        <i class='bx bx-time'></i>
+                    </div>
+                    <div>
+                        <p class="text-muted small mb-0">Pending Prep</p>
+                        <h3 class="fw-bold mb-0" id="stat-pending-orders">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card d-flex align-items-center gap-3">
+                    <div class="stats-icon bg-success bg-opacity-10 text-success">
+                        <i class='bx bx-rupee'></i>
+                    </div>
+                    <div>
+                        <p class="text-muted small mb-0">Total Revenue</p>
+                        <h3 class="fw-bold mb-0" id="stat-total-revenue">₹0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row g-4" id="orders-grid">
-            <!-- Orders will be injected here -->
+            <!-- Orders grid injected here -->
         </div>
     </div>
 

@@ -1,7 +1,10 @@
-// Cafe Website Script - jQuery & AJAX Version
+/**
+ * SP Waffles & Cafe - Main Store Script
+ * Handles menu rendering, cart management, and checkout.
+ */
 
 $(document).ready(function () {
-    // Local Fallback Data (In case AJAX is blocked on file:// protocol)
+    // Local Fallback Data
     const localMenuData = [
         { "id": 1, "name": "Choclate Overloaded", "category": "Pocket Waffles", "price": 90, "desc": "A chocolate lover's delight." },
         { "id": 2, "name": "Kitkat Nutella Waffle", "category": "Pocket Waffles", "price": 110, "desc": "Loaded with KitKat chunks and Nutella." },
@@ -81,15 +84,17 @@ $(document).ready(function () {
         { "id": 76, "name": "Pocket Waffle + Cold Coffe + French Fries", "category": "Combo", "price": 170, "desc": "Sweet, salty and refreshing combo." }
     ];
 
-    // State
+    // App State
     let menuData = [];
     let cart = [];
 
-    // Bootstrap Component Instances
+    // Bootstrap Instances
     const cartOffcanvas = new bootstrap.Offcanvas('#cartOffcanvas');
     const orderModal = new bootstrap.Modal('#orderModal');
 
-    // Initialize - Load Menu via AJAX
+    /**
+     * Initializes the app, loads menu data.
+     */
     function init() {
         $.ajax({
             url: 'menu.json',
@@ -98,11 +103,9 @@ $(document).ready(function () {
             success: function (data) {
                 menuData = data;
                 renderMenu("all");
-                console.log("Menu loaded successfully via AJAX.");
             },
-            error: function (err) {
-                console.warn("AJAX failed (likely CORS on file://). Using local fallback data.");
-                menuData = localMenuData;
+            error: function () {
+                menuData = localMenuData; // Fallback
                 renderMenu("all");
             }
         });
@@ -110,9 +113,10 @@ $(document).ready(function () {
         setupEventListeners();
     }
 
-    // EXPOSE FUNCTIONS GLOBALLY (Reliable for browsers)
+    /**
+     * Global add to cart function.
+     */
     window.addToCart = function (id) {
-        // Ensure menuData is loaded
         const currentData = menuData.length > 0 ? menuData : localMenuData;
         const item = currentData.find(i => i.id === parseInt(id));
 
@@ -125,13 +129,16 @@ $(document).ready(function () {
             cart.push({ ...item, qty: 1 });
         }
 
-        // Animation
+        // Cart Icon feedback animation
         $('#cart-icon').css('transform', 'scale(1.3)');
         setTimeout(() => $('#cart-icon').css('transform', 'scale(1)'), 200);
 
         updateCartUI();
     };
 
+    /**
+     * Updates quantity of items in cart.
+     */
     window.changeQty = function (id, delta) {
         const item = cart.find(c => c.id === parseInt(id));
         if (item) {
@@ -143,12 +150,17 @@ $(document).ready(function () {
         updateCartUI();
     };
 
+    /**
+     * Removes item from cart completely.
+     */
     window.removeItem = function (id) {
         cart = cart.filter(c => c.id !== parseInt(id));
         updateCartUI();
     };
 
-    // Render Menu Items
+    /**
+     * Renders filtered menu items to the grid.
+     */
     function renderMenu(category) {
         const $menuGrid = $('#menu-grid');
         $menuGrid.empty();
@@ -159,7 +171,7 @@ $(document).ready(function () {
             : currentData.filter(item => item.category === category);
 
         filteredMenu.forEach(item => {
-            const boxHtml = `
+            $menuGrid.append(`
                 <div class="col">
                     <div class="menu-item-box">
                         <div class="menu-item-info">
@@ -174,12 +186,13 @@ $(document).ready(function () {
                         </div>
                     </div>
                 </div>
-            `;
-            $menuGrid.append(boxHtml);
+            `);
         });
     }
 
-    // Setup Event Listeners
+    /**
+     * Sets up global event listeners.
+     */
     function setupEventListeners() {
         // Tab switching
         $(document).on('click', '.tab-btn, .btn-outline-primary[data-category]', function () {
@@ -189,14 +202,12 @@ $(document).ready(function () {
         });
 
         // Cart Toggle
-        $('#cart-icon').on('click', function () {
-            cartOffcanvas.show();
-        });
+        $('#cart-icon').on('click', () => cartOffcanvas.show());
 
-        // Checkout
+        // Checkout Trigger
         $('#checkout-btn').on('click', handleCheckout);
 
-        // Close Modal Reset
+        // Success Modal Close
         $('#close-modal-btn').on('click', function () {
             orderModal.hide();
             cart = [];
@@ -204,6 +215,9 @@ $(document).ready(function () {
         });
     }
 
+    /**
+     * Syncs cart state with UI elements.
+     */
     function updateCartUI() {
         const $cartItems = $('#cart-items');
         $cartItems.empty();
@@ -214,7 +228,7 @@ $(document).ready(function () {
             totalItems += item.qty;
             totalPrice += (item.qty * item.price);
 
-            const itemHtml = `
+            $cartItems.append(`
                 <div class="cart-item d-flex align-items-center gap-3 p-3 mb-3 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)] rounded-lg">
                     <div class="item-info flex-grow-1">
                         <h4 class="fs-6 fw-bold mb-1 text-white">${item.name}</h4>
@@ -227,15 +241,16 @@ $(document).ready(function () {
                         <button class="btn btn-sm text-danger ms-2 p-1" onclick="removeItem(${item.id})"><i class='bx bx-trash'></i></button>
                     </div>
                 </div>
-            `;
-            $cartItems.append(itemHtml);
+            `);
         });
 
         $('#cart-count').text(totalItems);
         $('#cart-total-price').text(`₹${totalPrice}`);
     }
 
-    // Checkout Logic
+    /**
+     * Processes order checkout and saves to LocalStorage.
+     */
     function handleCheckout() {
         if (cart.length === 0) {
             alert("Your cart is empty!");
@@ -244,7 +259,6 @@ $(document).ready(function () {
 
         cartOffcanvas.hide();
 
-        // Generate Receipt
         const $receipt = $('#receipt');
         $receipt.empty();
         let total = 0;
@@ -257,7 +271,7 @@ $(document).ready(function () {
 
             $receipt.append(`
                 <div class="d-flex justify-content-between mb-2">
-                    <span class="text-sm">${item.qty}x ${item.name}</span>
+                    <span class="text-sm text-white">${item.qty}x ${item.name}</span>
                     <span class="text-sm fw-bold text-white">₹${itemTotal}</span>
                 </div>
             `);
@@ -270,21 +284,33 @@ $(document).ready(function () {
             </div>
         `);
 
-        // Save to LocalStorage for Admin Dashboard
-        const newOrder = {
-            id: 'ORD-' + Math.floor(Math.random() * 1000000),
-            date: new Date().toLocaleString(),
-            items: orderItems,
-            total: total,
-            status: 'Pending'
-        };
-        const storedOrders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
-        storedOrders.push(newOrder);
-        localStorage.setItem('cafe_orders', JSON.stringify(storedOrders));
+        // Save order for Admin Dashboard
+        try {
+            const newOrder = {
+                id: 'ORD-' + Math.floor(Math.random() * 1000000),
+                date: new Date().toLocaleString(),
+                items: orderItems,
+                total: total,
+                status: 'Pending'
+            };
+            
+            const rawStored = localStorage.getItem('cafe_orders');
+            let storedOrders = [];
+            try {
+                storedOrders = JSON.parse(rawStored || '[]');
+            } catch (pErr) {
+                storedOrders = [];
+            }
+            
+            storedOrders.push(newOrder);
+            localStorage.setItem('cafe_orders', JSON.stringify(storedOrders));
+        } catch (sErr) {
+            console.warn("Storage quota might be reached.");
+        }
 
         orderModal.show();
     }
 
-    // Run Init
+    // Launch App
     init();
 });

@@ -1,0 +1,532 @@
+[
+    {
+        "id": 1,
+        "name": "Choclate Overloaded",
+        "category": "Pocket Waffles",
+        "price": 90,
+        "desc": "A chocolate lover's delight."
+    },
+    {
+        "id": 2,
+        "name": "Kitkat Nutella Waffle",
+        "category": "Pocket Waffles",
+        "price": 110,
+        "desc": "Loaded with KitKat chunks and Nutella."
+    },
+    {
+        "id": 3,
+        "name": "Kiki & Oreo Waffle",
+        "category": "Pocket Waffles",
+        "price": 130,
+        "desc": "Crunchy Oreo and KiKi goodness."
+    },
+    {
+        "id": 4,
+        "name": "Caramel Choclate Waffle",
+        "category": "Pocket Waffles",
+        "price": 130,
+        "desc": "Sweet caramel merged with chocolate."
+    },
+    {
+        "id": 5,
+        "name": "Dark & White Fantasy",
+        "category": "Pocket Waffles",
+        "price": 120,
+        "desc": "Dark and white chocolate blended."
+    },
+    {
+        "id": 6,
+        "name": "Rocky Road Fantasy",
+        "category": "Pocket Waffles",
+        "price": 120,
+        "desc": "Nuts, marshmallows, and thick chocolate."
+    },
+    {
+        "id": 7,
+        "name": "Biscoff Choclate Waffle",
+        "category": "Pocket Waffles",
+        "price": 140,
+        "desc": "Premium Lotus Biscoff flavor."
+    },
+    {
+        "id": 8,
+        "name": "Marvel Hazulnut",
+        "category": "Pocket Waffles",
+        "price": 120,
+        "desc": "Hazelnut spread delight."
+    },
+    {
+        "id": 9,
+        "name": "Pista Kunafa Waffle",
+        "category": "Pocket Waffles",
+        "price": 140,
+        "desc": "Rich Pistachio and crispy Kunafa."
+    },
+    {
+        "id": 10,
+        "name": "Tripple Choclate Waffle",
+        "category": "Pocket Waffles",
+        "price": 100,
+        "desc": "Three layers of chocolate magic."
+    },
+    {
+        "id": 11,
+        "name": "Blueberry Fantasy",
+        "category": "Pocket Waffles",
+        "price": 120,
+        "desc": "Fresh blueberry waffle."
+    },
+    {
+        "id": 12,
+        "name": "Butterscotch Waffle",
+        "category": "Pocket Waffles", price: 130, desc: "Crunchy butterscotch goodness."
+    },
+    {
+        "id": 13,
+        "name": "Classic Salted Fries",
+        "category": "French Fries",
+        "price": 50,
+        "desc": "Crispy golden salted fries."
+    },
+    {
+        "id": 14,
+        "name": "Classic Chili Lime Fries",
+        "category": "French Fries",
+        "price": 60,
+        "desc": "Tangy and spicy fries."
+    },
+    {
+        "id": 15,
+        "name": "Milky & Dark Chocalte",
+        "category": "Desert Bowls",
+        "price": 70,
+        "desc": "Rich mix of milk and dark chocolate."
+    },
+    {
+        "id": 16,
+        "name": "Dark Choclate Bowl",
+        "category": "Desert Bowls",
+        "price": 60,
+        "desc": "Rich dark chocolate dessert bowl."
+    },
+    {
+        "id": 17,
+        "name": "Almond Bowl",
+        "category": "Desert Bowls",
+        "price": 80,
+        "desc": "Loaded with fresh toasted almonds."
+    },
+    {
+        "id": 18,
+        "name": "Nutella Choclate Bowl",
+        "category": "Desert Bowls",
+        "price": 80,
+        "desc": "Thick Nutella dessert load."
+    },
+    {
+        "id": 19,
+        "name": "Kitkat & Oreo Bowl",
+        "category": "Desert Bowls",
+        "price": 80,
+        "desc": "Crushed Oreo and Kitkat."
+    },
+    {
+        "id": 20,
+        "name": "Blueberry Bowl",
+        "category": "Desert Bowls",
+        "price": 90,
+        "desc": "Fresh blueberries and cream."
+    },
+    {
+        "id": 21,
+        "name": "Orange Bowl",
+        "category": "Desert Bowls",
+        "price": 80,
+        "desc": "Citrus orange bliss."
+    },
+    {
+        "id": 22,
+        "name": "Strawberry Bowl (Seasonal)",
+        "category": "Desert Bowls",
+        "price": 90,
+        "desc": "Fresh seasonal strawberries."
+    },
+    {
+        "id": 23,
+        "name": "Lotti Choco Pie Bowl",
+        "category": "Desert Bowls",
+        "price": 90,
+        "desc": "Lotte choco pie mashed."
+    },
+    {
+        "id": 24,
+        "name": "Rosy Cream Bowl",
+        "category": "Desert Bowls",
+        "price": 70,
+        "desc": "Rose flavored cream and dessert."
+    },
+    {
+        "id": 25,
+        "name": "SP Special Bowl",
+        "category": "Desert Bowls",
+        "price": 90,
+        "desc": "Our signature dessert mix."
+    },
+    {
+        "id": 26,
+        "name": "Tandori Sandwitch",
+        "category": "Sandwitches",
+        "price": 100,
+        "desc": "Spiced tandoori grilled sandwich."
+    },
+    {
+        "id": 27,
+        "name": "Chilli Cheese Sandwitch",
+        "category": "Sandwitches",
+        "price": 120,
+        "desc": "Spicy and insanely cheesy."
+    },
+    {
+        "id": 28,
+        "name": "Bombay Sandwitch",
+        "category": "Sandwitches",
+        "price": 110,
+        "desc": "Classic street style club sandwich."
+    },
+    {
+        "id": 29,
+        "name": "Jumbo Mixed Sandwitch",
+        "category": "Sandwitches",
+        "price": 130,
+        "desc": "Fully loaded mega sandwich."
+    },
+    {
+        "id": 30,
+        "name": "Volcano Sandwitch",
+        "category": "Sandwitches",
+        "price": 120,
+        "desc": "Spicy overflowing volcano sandwich."
+    },
+    {
+        "id": 31,
+        "name": "Choclate Sandwitch",
+        "category": "Sandwitches",
+        "price": 100,
+        "desc": "Sweet chocolate grilled sandwich."
+    },
+    {
+        "id": 32,
+        "name": "Dark Choclate",
+        "category": "Mini Waffles",
+        "price": 60,
+        "desc": "Mini dark chocolate waffle."
+    },
+    {
+        "id": 33,
+        "name": "Milk Choclate",
+        "category": "Mini Waffles",
+        "price": 60,
+        "desc": "Mini milk chocolate waffle."
+    },
+    {
+        "id": 34,
+        "name": "Tripple Classic",
+        "category": "Mini Waffles",
+        "price": 70,
+        "desc": "Three flavors classic mini waffle."
+    },
+    {
+        "id": 35,
+        "name": "Kiki & Oreo",
+        "category": "Mini Waffles",
+        "price": 70,
+        "desc": "Crunchy Oreo mini waffle."
+    },
+    {
+        "id": 36,
+        "name": "Nutella Waffle",
+        "category": "Mini Waffles",
+        "price": 70,
+        "desc": "Nutella loaded mini waffle."
+    },
+    {
+        "id": 37,
+        "name": "Red Velvet Fantasy",
+        "category": "Mini Waffles",
+        "price": 80,
+        "desc": "Red velvet themed mini waffle."
+    },
+    {
+        "id": 38,
+        "name": "Cream & Choco",
+        "category": "Bubble Waffles",
+        "price": 130,
+        "desc": "Whipped cream and rich chocolate bubble waffle."
+    },
+    {
+        "id": 39,
+        "name": "Nutella & Berry",
+        "category": "Bubble Waffles",
+        "price": 140,
+        "desc": "Nutella and fresh berries bubble waffle."
+    },
+    {
+        "id": 40,
+        "name": "Nutella Pistachio",
+        "category": "Bubble Waffles",
+        "price": 130,
+        "desc": "Rich pistachio and Nutella bubble waffle."
+    },
+    {
+        "id": 41,
+        "name": "Mix Berry Waffle",
+        "category": "Bubble Waffles",
+        "price": 140,
+        "desc": "Loaded with assorted berries bubble waffle."
+    },
+    {
+        "id": 42,
+        "name": "Oreo Dinosaur",
+        "category": "Bubble Waffles",
+        "price": 130,
+        "desc": "Massive Oreo overload bubble waffle."
+    },
+    {
+        "id": 43,
+        "name": "Biscoff Dinosaur",
+        "category": "Bubble Waffles",
+        "price": 140,
+        "desc": "Massive Biscoff delight bubble waffle."
+    },
+    {
+        "id": 44,
+        "name": "Triple Choclate (8 PC)",
+        "category": "Mini Pancakes",
+        "price": 60,
+        "desc": "8 pieces of fluffy triple chocolate pancakes."
+    },
+    {
+        "id": 45,
+        "name": "Triple Choclate (12 PC)",
+        "category": "Mini Pancakes",
+        "price": 80,
+        "desc": "12 pieces of fluffy triple chocolate pancakes."
+    },
+    {
+        "id": 46,
+        "name": "Marvel Hazulnut (8 PC)",
+        "category": "Mini Pancakes",
+        "price": 60,
+        "desc": "8 pieces of hazelnut spread delight pancakes."
+    },
+    {
+        "id": 47,
+        "name": "Marvel Hazulnut (12 PC)",
+        "category": "Mini Pancakes",
+        "price": 80,
+        "desc": "12 pieces of hazelnut spread delight pancakes."
+    },
+    {
+        "id": 48,
+        "name": "Dark Temptation (8 PC)",
+        "category": "Mini Pancakes",
+        "price": 60,
+        "desc": "8 pieces of rich dark chocolate pancakes."
+    },
+    {
+        "id": 49,
+        "name": "Dark Temptation (12 PC)",
+        "category": "Mini Pancakes",
+        "price": 80,
+        "desc": "12 pieces of rich dark chocolate pancakes."
+    },
+    {
+        "id": 50,
+        "name": "Rose Choclate (8 PC)",
+        "category": "Mini Pancakes",
+        "price": 60,
+        "desc": "8 pieces of rose flavored chocolate pancakes."
+    },
+    {
+        "id": 51,
+        "name": "Rose Choclate (12 PC)",
+        "category": "Mini Pancakes",
+        "price": 70,
+        "desc": "12 pieces of rose flavored chocolate pancakes."
+    },
+    {
+        "id": 52,
+        "name": "Milk Temptation (8 PC)",
+        "category": "Mini Pancakes",
+        "price": 60,
+        "desc": "8 pieces of smooth milk chocolate pancakes."
+    },
+    {
+        "id": 53,
+        "name": "Milk Temptation (12 PC)",
+        "category": "Mini Pancakes",
+        "price": 70,
+        "desc": "12 pieces of smooth milk chocolate pancakes."
+    },
+    {
+        "id": 54,
+        "name": "Dark & Milky Beast (8 PC)",
+        "category": "Mini Pancakes",
+        "price": 70,
+        "desc": "8 pieces of best of dark and milk chocolate pancakes."
+    },
+    {
+        "id": 55,
+        "name": "Dark & Milky Beast (12 PC)",
+        "category": "Mini Pancakes",
+        "price": 80,
+        "desc": "12 pieces of best of dark and milk chocolate pancakes."
+    },
+    {
+        "id": 56,
+        "name": "Cold Coffe",
+        "category": "Cold Coffe",
+        "price": 80,
+        "desc": "Thick creamy cold coffee with chocolate drizzle."
+    },
+    {
+        "id": 57,
+        "name": "Cold Coffe with Icecream",
+        "category": "Cold Coffe",
+        "price": 100,
+        "desc": "Cold coffee topped with a huge vanilla scoop."
+    },
+    {
+        "id": 58,
+        "name": "Hot Coffe",
+        "category": "Cold Coffe",
+        "price": 50,
+        "desc": "Classic hot brewed coffee."
+    },
+    {
+        "id": 59,
+        "name": "Butter Scotch",
+        "category": "Icecream",
+        "price": 35,
+        "desc": "Classic butter scotch scoop."
+    },
+    {
+        "id": 60,
+        "name": "Vanilla Ice Cream",
+        "category": "Icecream",
+        "price": 30,
+        "desc": "Creamy vanilla."
+    },
+    {
+        "id": 61,
+        "name": "Kiki & Oreo Icecream",
+        "category": "Icecream",
+        "price": 40,
+        "desc": "Oreo chunks in cream."
+    },
+    {
+        "id": 62,
+        "name": "Choclate Icecream",
+        "category": "Icecream",
+        "price": 35,
+        "desc": "Rich chocolate scoop."
+    },
+    {
+        "id": 63,
+        "name": "Kitkat Mixed Shake",
+        "category": "Thick Shakes",
+        "price": 100,
+        "desc": "Thick milk shake loaded with KitKat."
+    },
+    {
+        "id": 64,
+        "name": "Oreo & Kiki Shake",
+        "category": "Thick Shakes",
+        "price": 110,
+        "desc": "Crunchy Oreo and Kiki."
+    },
+    {
+        "id": 65,
+        "name": "Strawberry Milk Shake (Seasonal)",
+        "category": "Thick Shakes",
+        "price": 100,
+        "desc": "Sweet strawberry thick shake."
+    },
+    {
+        "id": 66,
+        "name": "Dark Fantasy Milk Shake",
+        "category": "Thick Shakes",
+        "price": 120,
+        "desc": "Blended Dark Fantasy cookies."
+    },
+    {
+        "id": 67,
+        "name": "Dry Fruit Milk Shake",
+        "category": "Thick Shakes",
+        "price": 120,
+        "desc": "Healthy loaded dry fruit shake."
+    },
+    {
+        "id": 68,
+        "name": "Vanilla Oreo Jar",
+        "category": "Cake Jars",
+        "price": 90,
+        "desc": "Layered oreo and vanilla cake."
+    },
+    {
+        "id": 69,
+        "name": "Black Forest Jar",
+        "category": "Cake Jars",
+        "price": 90,
+        "desc": "Classic black forest in a jar."
+    },
+    {
+        "id": 70,
+        "name": "Lotus Biscoff Jar",
+        "category": "Cake Jars",
+        "price": 100,
+        "desc": "Premium Biscoff layered jar."
+    },
+    {
+        "id": 71,
+        "name": "Double Choclate Jar",
+        "category": "Cake Jars",
+        "price": 90,
+        "desc": "Overloaded chocolate cake jar."
+    },
+    {
+        "id": 72,
+        "name": "Berry Smoothie",
+        "category": "Smooties",
+        "price": 90,
+        "desc": "Fresh mixed berry blend."
+    },
+    {
+        "id": 73,
+        "name": "Choclate Banana",
+        "category": "Smooties",
+        "price": 80,
+        "desc": "Classic choco-banana."
+    },
+    {
+        "id": 74,
+        "name": "Strawberry Smoothie",
+        "category": "Smooties",
+        "price": 100,
+        "desc": "Seasonal strawberry smoothie."
+    },
+    {
+        "id": 75,
+        "name": "Sandwitch + Cold Coffe + French Fries",
+        "category": "Combo",
+        "price": 200,
+        "desc": "The perfect munch combo."
+    },
+    {
+        "id": 76,
+        "name": "Pocket Waffle + Cold Coffe + French Fries",
+        "category": "Combo",
+        "price": 170,
+        "desc": "Sweet, salty and refreshing combo."
+    }
+]

@@ -12,137 +12,198 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- Frameworks & Libraries -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS (Play CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Boxicons for Icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#d35400',
+                        secondary: '#e67e22',
+                        dark: '#121212',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
 
     <!-- Header / Navbar -->
-    <header class="header">
-        <div class="logo">
-            <img src="logo.jpg" alt="Logo" class="logo-img"> SP Waffles & Cafe
+    <nav class="navbar navbar-dark fixed-top px-2 py-3"
+        style="background: rgba(18, 18, 18, 0.98); backdrop-filter: blur(10px); border-bottom: 2px solid #d35400; z-index: 9999;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand logo d-flex align-items-center gap-1 m-0" href="#"
+                style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #d35400;">
+                <img src="logo.jpg" alt="Logo" class="logo-img rounded-circle"
+                    style="width: 30px; height: 30px; border: 1px solid #d35400;">
+                <span class="d-none d-sm-inline">SP Waffles & Cafe</span>
+                <span class="d-inline d-sm-none">SP Waffles</span>
+            </a>
+
+            <div class="d-flex align-items-center gap-2 gap-sm-4">
+                <a class="text-white text-decoration-none fw-bold small hover:text-[#d35400]" href="#home">Home</a>
+                <a class="text-white text-decoration-none fw-bold small hover:text-[#d35400]" href="#menu">Menu</a>
+                <a class="text-white text-decoration-none fw-bold small hover:text-[#d35400]" href="#about">About</a>
+                <div class="cart-icon position-relative cursor-pointer text-white" id="cart-icon"
+                    style="font-size: 1.5rem;">
+                    <i class='bx bx-cart'></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        id="cart-count" style="font-size: 0.5rem; padding: 0.35em 0.5em;">0</span>
+                </div>
+            </div>
         </div>
-        <nav class="nav">
-            <a href="#home">Home</a>
-            <a href="#menu">Menu</a>
-            <a href="#about">About</a>
-        </nav>
-        <div class="cart-icon" id="cart-icon">
-            <i class='bx bx-cart'></i>
-            <span class="cart-count" id="cart-count">0</span>
-        </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Premium Waffles & Extraordinary Coffee</h1>
-            <p>Treat yourself to the rich, decadent flavors of our freshly baked waffles and expertly crafted beverages.
-            </p>
-            <a href="#menu" class="btn btn-primary">Order Now</a>
+    <section class="hero d-flex align-items-center justify-content-center text-center px-4" id="home">
+        <div class="hero-content relative z-10 max-w-3xl">
+            <h1 class="display-5 display-md-3 display-lg-1 fw-bold mb-3"
+                style="font-family: 'Playfair Display', serif;">Premium Waffles & Extraordinary Coffee</h1>
+            <p class="fs-6 fs-md-5 text-[#aaaaaa] mb-4">Treat yourself to the rich, decadent flavors of our freshly
+                baked waffles and expertly crafted beverages.</p>
+            <a href="#menu" class="btn btn-primary btn-lg shadow-lg px-5 py-3 rounded-pill">Order Now</a>
         </div>
     </section>
 
     <!-- Menu Section -->
-    <section class="menu-section" id="menu">
-        <div class="section-title">
-            <h2>Our Menu</h2>
-            <p>Select your favorite treats and add them to cart.</p>
+    <section class="menu-section py-20 px-4" id="menu">
+        <div class="container text-center mb-10">
+            <h2 class="display-4 text-[#d35400] mb-2" style="font-family: 'Playfair Display', serif;">Our Menu</h2>
+            <p class="text-[#aaaaaa] mb-5">Select your favorite treats and add them to cart.</p>
         </div>
 
         <!-- Menu Tabs -->
-        <div class="menu-tabs"
-            style="overflow-x: auto; white-space: nowrap; padding-bottom: 10px; justify-content: flex-start; max-width: 100%;">
-            <button class="tab-btn active" data-category="all">All</button>
-            <button class="tab-btn" data-category="Pocket Waffles">Pocket Waffles</button>
-            <button class="tab-btn" data-category="Mini Waffles">Mini Waffles</button>
-            <button class="tab-btn" data-category="Bubble Waffles">Bubble Waffles</button>
-            <button class="tab-btn" data-category="Mini Pancakes">Mini Pancakes</button>
-            <button class="tab-btn" data-category="Sandwitches">Sandwitches</button>
-            <button class="tab-btn" data-category="French Fries">French Fries</button>
-            <button class="tab-btn" data-category="Desert Bowls">Desert Bowls</button>
-            <button class="tab-btn" data-category="Icecream">Icecream</button>
-            <button class="tab-btn" data-category="Cake Jars">Cake Jars</button>
-            <button class="tab-btn" data-category="Thick Shakes">Thick Shakes</button>
-            <button class="tab-btn" data-category="Smooties">Smooties</button>
-            <button class="tab-btn" data-category="Cold Coffe">Cold Coffe</button>
-            <button class="tab-btn" data-category="Combo">Combo</button>
+        <div class="container overflow-x-auto whitespace-nowrap pb-4 mb-5 d-flex justify-content-start gap-2"
+            style="max-width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <button class="btn btn-outline-primary active rounded-pill fw-semibold" data-category="all">All</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Pocket Waffles">Pocket
+                Waffles</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Mini Waffles">Mini
+                Waffles</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Bubble Waffles">Bubble
+                Waffles</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Mini Pancakes">Mini
+                Pancakes</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold"
+                data-category="Sandwitches">Sandwitches</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="French Fries">French
+                Fries</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Desert Bowls">Desert
+                Bowls</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Icecream">Icecream</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Cake Jars">Cake
+                Jars</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Thick Shakes">Thick
+                Shakes</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Smooties">Smooties</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Cold Coffe">Cold
+                Coffe</button>
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-category="Combo">Combo</button>
         </div>
 
         <!-- Menu Grid -->
-        <div class="menu-grid" id="menu-grid">
-            <!-- Dynamic Menu Items will be injected here via JS -->
+        <div class="container">
+            <div class="row g-4 row-cols-1 row-cols-lg-2" id="menu-grid">
+                <!-- Dynamic Menu Items will be injected here via JS -->
+            </div>
         </div>
     </section>
 
-    <!-- Cart Overlay -->
-    <div class="cart-overlay" id="cart-overlay">
-        <div class="cart-drawer">
-            <div class="cart-header">
-                <h2>Your Order Let's Go!</h2>
-                <button class="close-cart" id="close-cart"><i class='bx bx-x'></i></button>
-            </div>
-            <div class="cart-items" id="cart-items">
+    <!-- Cart Offcanvas -->
+    <div class="offcanvas offcanvas-end bg-dark text-white shadow-lg" tabindex="-1" id="cartOffcanvas"
+        style="width: 100%; max-width: 400px;">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title" id="cartOffcanvasLabel">Your Order Let's Go!</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="cart-items mb-4" id="cart-items">
                 <!-- Cart items dynamically injected here -->
             </div>
-            <div class="cart-footer">
-                <div class="total">
-                    <span>Total:</span>
-                    <span id="cart-total-price">₹0</span>
-                </div>
-                <button class="btn btn-primary checkout-btn" id="checkout-btn">Checkout</button>
+        </div>
+        <div class="offcanvas-footer p-4 border-top border-secondary">
+            <div class="d-flex justify-content-between fs-4 fw-bold mb-3">
+                <span>Total:</span>
+                <span id="cart-total-price">₹0</span>
             </div>
+            <button class="btn btn-primary w-100 py-3 fw-bold fs-5 shadow-lg" id="checkout-btn">Checkout Now</button>
         </div>
     </div>
 
     <!-- Order Confirmation Modal -->
-    <div class="modal" id="order-modal">
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class='bx bxs-check-circle'></i>
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark border border-primary p-4 text-center shadow-lg">
+                <div class="modal-body">
+                    <div class="modal-icon mb-3">
+                        <i class='bx bxs-check-circle text-success display-1'></i>
+                    </div>
+                    <h2 class="fw-bold text-white mb-2">Order Confirmed!</h2>
+                    <p class="text-[#aaaaaa] mb-4">Your delicious treats are being prepared.</p>
+                    <div class="receipt text-start bg-[rgba(255,255,255,0.05)] rounded p-3 mb-4 max-h-60 overflow-auto"
+                        id="receipt">
+                        <!-- Receipt details injected here -->
+                    </div>
+                    <button class="btn btn-primary btn-lg w-100 fw-bold" id="close-modal-btn">Awesome, thanks!</button>
+                </div>
             </div>
-            <h2>Order Confirmed!</h2>
-            <p>Your delicious treats are being prepared.</p>
-            <div class="receipt" id="receipt">
-                <!-- Receipt details injected here -->
-            </div>
-            <button class="btn btn-primary" id="close-modal-btn">Awesome, thanks!</button>
         </div>
     </div>
 
     <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="section-title">
-            <h2>About Us</h2>
-            <p>Know more about our story and contact us.</p>
+    <section class="about-section py-20 px-4 bg-gradient-to-b from-transparent to-[rgba(211,84,0,0.05)]" id="about">
+        <div class="container text-center mb-16">
+            <h2 class="display-4 text-[#d35400] mb-2" style="font-family: 'Playfair Display', serif;">About Us</h2>
+            <p class="text-[#aaaaaa]">Know more about our story and contact us.</p>
         </div>
-        <div class="about-container">
-            <div class="about-logo">
-                <img src="logo.jpg" alt="SP Waffles & Cafe Logo" class="main-logo">
-            </div>
-            <div class="about-text">
-                <h3>Our Story</h3>
-                <p>Welcome to SP Waffles & Cafe, where every bite is a celebration of flavor and every cup of coffee is
-                    crafted with passion. Founded with a love for desserts and a commitment to quality, we bring you the
-                    finest waffles, pancakes, and beverages in town. Our mission is to create delightful moments for our
-                    customers through exceptional taste and warm hospitality.</p>
-            </div>
-            <div class="contact-card">
-                <h3>Contact Owner</h3>
-                <div class="contact-info">
-                    <div class="info-item">
-                        <i class='bx bxs-user'></i>
-                        <span>Shubham Patil</span>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bxs-phone'></i>
-                        <span>8806764504</span>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bxs-envelope'></i>
-                        <span>Shubhamp.ehs@gmail.com</span>
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-12 col-md-6 col-lg-3 text-center">
+                    <img src="logo.jpg" alt="SP Waffles & Cafe Logo"
+                        class="img-fluid rounded-circle shadow-lg hover:scale-105 hover:rotate-2 transition-transform duration-300"
+                        style="width: 200px; height: 200px; object-fit: cover; border: 5px solid #d35400;">
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 text-center text-md-start">
+                    <h3 class="h2 mb-4" style="font-family: 'Playfair Display', serif;">Our Story</h3>
+                    <p class="text-[#aaaaaa]">Welcome to SP Waffles & Cafe, where every bite is a celebration of flavor
+                        and every cup of coffee is crafted with passion. We bring you the finest waffles, pancakes, and
+                        beverages in town.</p>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div
+                        class="contact-card bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] p-4 rounded-lg shadow-xl backdrop-blur-md">
+                        <h3 class="h4 mb-4 text-[#d35400] text-center text-lg-start"
+                            style="font-family: 'Playfair Display', serif;">Contact Owner</h3>
+                        <div class="d-flex flex-column gap-3">
+                            <div
+                                class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3">
+                                <i class='bx bxs-user text-[#d35400]'></i>
+                                <span>Shubham Patil</span>
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3">
+                                <i class='bx bxs-phone text-[#d35400]'></i>
+                                <span>8806764504</span>
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3">
+                                <i class='bx bxs-envelope text-[#d35400]'></i>
+                                <span class="small">Shubhamp.ehs@gmail.com</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,7 +212,8 @@
 
     <!-- Footer -->
     <footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 3rem;">
-        <p id="admin-trigger" style="cursor: default; user-select: none;">&copy; 2026 SP Waffles & Cafe. All rights reserved.</p>
+        <p id="admin-trigger" style="cursor: default; user-select: none;">&copy; 2026 SP Waffles & Cafe. All rights
+            reserved.</p>
     </footer>
 
     <script>
@@ -160,6 +222,12 @@
             window.location.href = 'admin.html';
         });
     </script>
+
+    <!-- Libraries & Scripts -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="script.js"></script>
 </body>

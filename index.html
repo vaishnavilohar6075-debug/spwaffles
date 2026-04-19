@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP Waffles & Cafe</title>
+    <meta name="description" content="Order your favorite Waffles, Pancakes, and Coffees from SP Waffles & Cafe.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Boxicons for Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="header">
+        <div class="logo">
+            <img src="logo.jpg" alt="Logo" class="logo-img"> SP Waffles & Cafe
+        </div>
+        <nav class="nav">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+            <i class='bx bx-cart'></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Waffles & Extraordinary Coffee</h1>
+            <p>Treat yourself to the rich, decadent flavors of our freshly baked waffles and expertly crafted beverages.
+            </p>
+            <a href="#menu" class="btn btn-primary">Order Now</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="section-title">
+            <h2>Our Menu</h2>
+            <p>Select your favorite treats and add them to cart.</p>
+        </div>
+
+        <!-- Menu Tabs -->
+        <div class="menu-tabs"
+            style="overflow-x: auto; white-space: nowrap; padding-bottom: 10px; justify-content: flex-start; max-width: 100%;">
+            <button class="tab-btn active" data-category="all">All</button>
+            <button class="tab-btn" data-category="Pocket Waffles">Pocket Waffles</button>
+            <button class="tab-btn" data-category="Mini Waffles">Mini Waffles</button>
+            <button class="tab-btn" data-category="Bubble Waffles">Bubble Waffles</button>
+            <button class="tab-btn" data-category="Mini Pancakes">Mini Pancakes</button>
+            <button class="tab-btn" data-category="Sandwitches">Sandwitches</button>
+            <button class="tab-btn" data-category="French Fries">French Fries</button>
+            <button class="tab-btn" data-category="Desert Bowls">Desert Bowls</button>
+            <button class="tab-btn" data-category="Icecream">Icecream</button>
+            <button class="tab-btn" data-category="Cake Jars">Cake Jars</button>
+            <button class="tab-btn" data-category="Thick Shakes">Thick Shakes</button>
+            <button class="tab-btn" data-category="Smooties">Smooties</button>
+            <button class="tab-btn" data-category="Cold Coffe">Cold Coffe</button>
+            <button class="tab-btn" data-category="Combo">Combo</button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="menu-grid" id="menu-grid">
+            <!-- Dynamic Menu Items will be injected here via JS -->
+        </div>
+    </section>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay">
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <h2>Your Order Let's Go!</h2>
+                <button class="close-cart" id="close-cart"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items dynamically injected here -->
+            </div>
+            <div class="cart-footer">
+                <div class="total">
+                    <span>Total:</span>
+                    <span id="cart-total-price">₹0</span>
+                </div>
+                <button class="btn btn-primary checkout-btn" id="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class='bx bxs-check-circle'></i>
+            </div>
+            <h2>Order Confirmed!</h2>
+            <p>Your delicious treats are being prepared.</p>
+            <div class="receipt" id="receipt">
+                <!-- Receipt details injected here -->
+            </div>
+            <button class="btn btn-primary" id="close-modal-btn">Awesome, thanks!</button>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <p>Know more about our story and contact us.</p>
+        </div>
+        <div class="about-container">
+            <div class="about-logo">
+                <img src="logo.jpg" alt="SP Waffles & Cafe Logo" class="main-logo">
+            </div>
+            <div class="about-text">
+                <h3>Our Story</h3>
+                <p>Welcome to SP Waffles & Cafe, where every bite is a celebration of flavor and every cup of coffee is
+                    crafted with passion. Founded with a love for desserts and a commitment to quality, we bring you the
+                    finest waffles, pancakes, and beverages in town. Our mission is to create delightful moments for our
+                    customers through exceptional taste and warm hospitality.</p>
+            </div>
+            <div class="contact-card">
+                <h3>Contact Owner</h3>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class='bx bxs-user'></i>
+                        <span>Shubham Patil</span>
+                    </div>
+                    <div class="info-item">
+                        <i class='bx bxs-phone'></i>
+                        <span>8806764504</span>
+                    </div>
+                    <div class="info-item">
+                        <i class='bx bxs-envelope'></i>
+                        <span>Shubhamp.ehs@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 3rem;">
+        <p id="admin-trigger" style="cursor: default; user-select: none;">&copy; 2026 SP Waffles & Cafe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Secret shortcut to admin page
+        document.getElementById('admin-trigger').addEventListener('dblclick', () => {
+            window.location.href = 'admin.html';
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

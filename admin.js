@@ -1,42 +1,37 @@
 /**
- * Owner Dashboard Logic - SP Waffles & Cafe
- * Handles authentication, order fetching, and status management.
+ * Owner Dashboard Logic - Backend Database Connected
  */
 
 const ADMIN_PASSWORD = "spwaffles";
 
 /**
- * Loads and renders orders from localStorage.
- * Updates dashboard statistics in real-time.
+ * Fetch orders from the Backend SQLite Database
  */
-window.loadOrders = function () {
+window.loadOrders = async function () {
     const $grid = $('#orders-grid');
     const $refreshIcon = $('#refresh-icon');
     const $refreshText = $('#refresh-text');
     const $lastUpdated = $('#last-updated');
     
-    // Visual Refresh Feedback
     $refreshIcon.addClass('bx-spin');
     $refreshText.text('Refreshing...');
     
     if (!$grid.length) return;
 
     try {
-        const rawData = localStorage.getItem('cafe_orders');
-        const storedOrders = JSON.parse(rawData || '[]');
+        const response = await fetch('/api/orders');
+        const storedOrders = await response.json();
+        
         $grid.empty();
 
-        // Calculate Dashboard Stats
         const totalOrders = storedOrders.length;
         const pendingOrders = storedOrders.filter(o => o.status === 'Pending').length;
         const totalRevenue = storedOrders.reduce((acc, order) => acc + (Number(order.total) || 0), 0);
 
-        // Update Stats UI
         $('#stat-total-orders').text(totalOrders);
         $('#stat-pending-orders').text(pendingOrders);
         $('#stat-total-revenue').text(`₹${totalRevenue.toLocaleString()}`);
 
-        // Update Timestamp
         const now = new Date();
         $lastUpdated.text("Last updated: " + now.toLocaleTimeString());
 
@@ -46,16 +41,15 @@ window.loadOrders = function () {
                     <div class="no-orders text-center">
                         <i class='bx bx-receipt fs-1 mb-3 opacity-50' style="color: var(--primary-color);"></i>
                         <h4 class="text-white fw-bold">No Orders Yet</h4>
-                        <p class="mb-0 text-muted">Your dashboard is empty. New orders will appear here.</p>
+                        <p class="mb-0 text-muted">Your dashboard is empty.</p>
                     </div>
                 </div>
             `);
         } else {
-            // Render latest orders first
+            // Render latest orders first (Backend fetches them in insertion order)
             const reversedOrders = [...storedOrders].reverse();
 
-            reversedOrders.forEach((order, index) => {
-                const originalIndex = storedOrders.length - 1 - index;
+            reversedOrders.forEach((order) => {
                 const statusClass = order.status === 'Completed' ? 'bg-success' : 'bg-warning text-dark';
 
                 let itemsHtml = '';
@@ -64,7 +58,7 @@ window.loadOrders = function () {
                         itemsHtml += `
                             <div class="d-flex justify-content-between text-sm py-1 border-bottom border-secondary border-opacity-25">
                                 <span class="text-white fw-bold fs-6">${item.qty}x ${item.name}</span>
-                                <span class="fw-bold text-primary">₹${item.total}</span>
+                                <span class="fw-bold text-primary">₹${item.price * item.qty}</span>
                             </div>
                         `;
                     });
@@ -74,7 +68,7 @@ window.loadOrders = function () {
                     <div class="col-md-6 col-lg-4">
                         <div class="card bg-dark border-secondary h-100 shadow-sm transition-all duration-300 hover:border-primary">
                             <div class="card-header bg-transparent d-flex justify-content-between align-items-center border-secondary py-3">
-                                <span class="text-primary fw-bold">#${(order.id || 'N/A').slice(-6).toUpperCase()}</span>
+                                <span class="text-primary fw-bold">${order.id}</span>
                                 <span class="badge ${statusClass}">${order.status}</span>
                             </div>
                             <div class="card-body">
@@ -86,11 +80,11 @@ window.loadOrders = function () {
                             </div>
                             <div class="card-footer bg-transparent border-secondary d-flex gap-2 p-3">
                                 ${order.status === 'Pending' ? `
-                                    <button class="btn btn-success btn-sm flex-grow-1 fw-bold" onclick="markCompleted(${originalIndex})">
+                                    <button class="btn btn-success btn-sm flex-grow-1 fw-bold" onclick="markCompleted('${order.id}')">
                                         <i class='bx bx-check'></i> Mark Complete
                                     </button>
                                 ` : ''}
-                                <button class="btn btn-outline-danger btn-sm px-3" onclick="deleteOrder(${originalIndex})">
+                                <button class="btn btn-outline-danger btn-sm px-3" onclick="deleteOrder('${order.id}')">
                                     <i class='bx bx-trash'></i>
                                 </button>
                             </div>
@@ -100,48 +94,47 @@ window.loadOrders = function () {
             });
         }
         
-        // Reset Refresh Button view after a short delay
         setTimeout(() => {
             $refreshIcon.removeClass('bx-spin');
             $refreshText.text('Refresh Dashboard');
         }, 600);
 
     } catch (error) {
-        $grid.html(`<div class="col-12 text-center text-danger py-5"><p>Failed to load orders. Storage might be corrupted.</p></div>`);
+        console.error(error);
+        $grid.html(`<div class="col-12 text-center text-danger py-5"><p>Failed to connect to backend server.</p></div>`);
         $refreshIcon.removeClass('bx-spin');
         $refreshText.text('Refresh Dashboard');
     }
 };
 
 /**
- * Marks an order as completed.
+ * Update Status via API
  */
-window.markCompleted = function (index) {
-    const orders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
-    if (orders[index]) {
-        orders[index].status = 'Completed';
-        localStorage.setItem('cafe_orders', JSON.stringify(orders));
+window.markCompleted = async function (id) {
+    try {
+        await fetch(`/api/orders/${id}/complete`, { method: 'PUT' });
         window.loadOrders();
+    } catch (err) {
+        alert("Error updating order.");
     }
 };
 
 /**
- * Deletes an order from storage.
+ * Delete Order via API
  */
-window.deleteOrder = function (index) {
+window.deleteOrder = async function (id) {
     if (confirm("Are you sure you want to delete this order?")) {
-        const orders = JSON.parse(localStorage.getItem('cafe_orders') || '[]');
-        orders.splice(index, 1);
-        localStorage.setItem('cafe_orders', JSON.stringify(orders));
-        window.loadOrders();
+        try {
+            await fetch(`/api/orders/${id}`, { method: 'DELETE' });
+            window.loadOrders();
+        } catch (err) {
+            alert("Error deleting order.");
+        }
     }
 };
 
 // Start Dashboard flow
 $(document).ready(function () {
-    /**
-     * Checks for admin session before showing dashboard.
-     */
     function checkAuth() {
         const isAuth = sessionStorage.getItem('cafe_admin_auth');
         const $container = $('.admin-container');
@@ -161,6 +154,5 @@ $(document).ready(function () {
             }
         }
     }
-
     checkAuth();
 });
